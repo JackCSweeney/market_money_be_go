@@ -12,6 +12,7 @@ func main() {
 	route := gin.Default()
 	database.ConnectDatabase()
 	route.POST("/vendors", vendors.AddVendor)
+	route.PATCH("/vendors", vendors.UpdateVendor)
 	route.GET("/vendors", vendors.GetAllVendors)
 	route.GET("/vendors/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
