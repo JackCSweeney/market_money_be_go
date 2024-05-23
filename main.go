@@ -5,12 +5,17 @@ import (
 	"example.com/mod/vendors"
 	"example.com/mod/database"
 	"github.com/gin-gonic/gin"
+	"strconv"
 )
 
 func main() {
 	route := gin.Default()
 	database.ConnectDatabase()
 	route.POST("/vendors", vendors.AddVendor)
+	route.GET("/vendors/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		vendors.GetOneVendor(c, id)
+	})
 
 	err := route.Run(":8080")
 	if err != nil {
