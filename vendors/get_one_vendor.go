@@ -20,6 +20,6 @@ func GetOneVendor(c *gin.Context, id int) {
 	case nil:
 		c.JSON(http.StatusOK, vendor)
 	default:
-		panic(err)
+		c.JSON(http.StatusBadRequest, err)
 	}
 }
