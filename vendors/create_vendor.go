@@ -9,15 +9,6 @@ import (
 	"net/http"
 )
 
-type Vendor struct {
-	ID             int    `json:"id"`
-	Name           string `json:"name"`
-	Description    string `json:"description"`
-	ContactName    string `json:"contact_name"`
-	ContactPhone   string `json:"contact_phone"`
-	CreditAccepted bool   `json:"credit_accepted"`
-}
-
 func AddVendor(c *gin.Context) {
 	body := Vendor{}
 	data, err := c.GetRawData()
