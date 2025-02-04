@@ -2,16 +2,18 @@ package main
 
 import (
 	"fmt"
+	"strconv"
+
+	"example.com/mod/database"
 	"example.com/mod/markets"
 	"example.com/mod/vendors"
-	"example.com/mod/database"
 	"github.com/gin-gonic/gin"
-	"strconv"
 )
 
 func main() {
 	route := gin.Default()
 	database.ConnectDatabase()
+
 	// vendor endpoints
 	route.POST("/vendors", vendors.AddVendor)
 	route.PATCH("/vendors", vendors.UpdateVendor)
@@ -20,11 +22,12 @@ func main() {
 		id, _ := strconv.Atoi(c.Param("id"))
 		vendors.GetOneVendor(c, id)
 	})
+
 	// market endpoints
 	route.GET("/markets", markets.GetAllMarkets)
-	routs.GET("/markets/:id", func(c *gin.Context) {
+	route.GET("/markets/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
-		markets.GetOneVendor(c, id)
+		markets.GetOneMarket(c, id)
 	})
 
 	err := route.Run(":8080")
