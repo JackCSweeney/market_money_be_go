@@ -14,9 +14,9 @@ func GetOneMarket(c *gin.Context, id int) {
 	var market Market
 
 	row := database.Db.QueryRow(sqlStatement, id)
-	err := row.Scan(&market.ID, &market.Name, &market.Street, &market.City, &market.State, &market.Zip, &market.Lat, &market.Lon, &market.VendorCount)
+	err := row.Scan(&market.ID, &market.Name, &market.Street, &market.City, &market.County, &market.State, &market.Zip, &market.Lat, &market.Lon)
 
-	errorMessage, _ := fmt.Printf("Error: Market record not found with id: %s", strconv.Itoa(id))
+	errorMessage := fmt.Sprintf("Error: Market record not found with id: %s", strconv.Itoa(id))
 
 	switch err {
 	case sql.ErrNoRows:
