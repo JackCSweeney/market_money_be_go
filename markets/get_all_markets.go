@@ -20,7 +20,7 @@ func GetAllMarkets(c *gin.Context) {
 	defer rows.Close()
 	for rows.Next() {
 		var market Market
-		err = rows.Scan(&market.ID, &market.Name, &market.Street, &market.City, &market.State, &market.Zip, &market.Lat, &market.Lon, &market.VendorCount)
+		err = rows.Scan(&market.ID, &market.Name, &market.Street, &market.City, &market.County, &market.State, &market.Zip, &market.Lat, &market.Lon)
 
 		if err != nil {
 			fmt.Println("Error: Record missing needed information")

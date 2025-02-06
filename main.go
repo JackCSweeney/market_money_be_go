@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
-
+	"example.com/mod/market_vendors"
 	"example.com/mod/database"
 	"example.com/mod/markets"
 	"example.com/mod/vendors"
@@ -29,6 +29,9 @@ func main() {
 		id, _ := strconv.Atoi(c.Param("id"))
 		markets.GetOneMarket(c, id)
 	})
+
+	// market vendor endpoints
+	route.POST("/market_vendors", marketvendors.AddMarketVendor)
 
 	err := route.Run(":8080")
 	if err != nil {
