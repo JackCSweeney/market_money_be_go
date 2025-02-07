@@ -14,7 +14,7 @@ var Db *sql.DB // created outside func so it's a global variable
 func ConnectDatabase() {
 	err := godotenv.Load()
 	if err != nil {
-		fmt.Println("Error has occured with loading .env file")
+		fmt.Println("Error has occurred with loading .env file")
 	}
 
 	host := os.Getenv("HOST")
