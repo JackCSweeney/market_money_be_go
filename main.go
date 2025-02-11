@@ -10,30 +10,35 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func setupRouter() *gin.Engine {
+	r := gin.Default()
+	return r
+}
+
 func main() {
-	route := gin.Default()
+	router := setupRouter()
 	database.ConnectDatabase()
 
 	// vendor endpoints
-	route.POST("/vendors", vendors.AddVendor)
-	route.PATCH("/vendors", vendors.UpdateVendor)
-	route.GET("/vendors", vendors.GetAllVendors)
-	route.GET("/vendors/:id", func(c *gin.Context) {
+	router.POST("/vendors", vendors.AddVendor)
+	router.PATCH("/vendors", vendors.UpdateVendor)
+	router.GET("/vendors", vendors.GetAllVendors)
+	router.GET("/vendors/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
 		vendors.GetOneVendor(c, id)
 	})
 
 	// market endpoints
-	route.GET("/markets", markets.GetAllMarkets)
-	route.GET("/markets/:id", func(c *gin.Context) {
+	router.GET("/markets", markets.GetAllMarkets)
+	router.GET("/markets/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
 		markets.GetOneMarket(c, id)
 	})
 
 	// market vendor endpoints
-	route.POST("/market_vendors", marketvendors.AddMarketVendor)
+	router.POST("/market_vendors", marketvendors.AddMarketVendor)
 
-	err := route.Run(":8080")
+	err := router.Run(":8080")
 	if err != nil {
 		fmt.Println("Error starting server")
 		panic(err)
