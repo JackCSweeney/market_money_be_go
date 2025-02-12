@@ -61,4 +61,28 @@ func TestGetAllVendors(t *testing.T) {
 	vendors, _ := GetAllVendors()
 
 	assert.Equal(t, 2, len(vendors))
+	assert.Equal(t, Vendor1.Id, vendors[0].Id)
+	assert.Equal(t, Vendor2.Id, vendors[1].Id)
+}
+
+func TestUpdateVendor(t *testing.T) {
+	vendorUpdates := Vendor{Id: Vendor1.Id, Name: "Vendor 3", Description: "Third Vendor", ContactName: "Updated Name", ContactPhone: "New Num", CreditAccepted: true}
+	vendor, _ := UpdateVendor(vendorUpdates.Id, vendorUpdates)
+	var updatedVendor Vendor
+	updatedVendor, _ = GetVendorById(vendor.Id)
+
+	assert.Equal(t, "Updated Name", vendor.ContactName)
+	assert.Equal(t, "Updated Name", updatedVendor.ContactName)
+}
+
+func TestCreateVendor(t *testing.T) {
+	newVendor, _ := CreateVendor("Name", "Description", "Contact Name", "Contact Phone", false)
+	foundVendor, _ := GetVendorById(newVendor.Id)
+	assert.IsType(t, Vendor{}, newVendor)
+	assert.Equal(t, foundVendor.Id, newVendor.Id)
+	assert.Equal(t, foundVendor.Name, newVendor.Name)
+	assert.Equal(t, foundVendor.ContactName, newVendor.ContactName)
+	assert.Equal(t, foundVendor.ContactPhone, newVendor.ContactPhone)
+	assert.Equal(t, foundVendor.Description, newVendor.Description)
+	assert.Equal(t, foundVendor.CreditAccepted, newVendor.CreditAccepted)
 }
