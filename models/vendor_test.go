@@ -3,7 +3,6 @@ package models
 import (
 	"testing"
 	"example.com/mod/database"
-	"os"
 	_ "github.com/lib/pq"
 	"github.com/stretchr/testify/assert"
 )
@@ -11,11 +10,7 @@ import (
 var Vendor1 Vendor
 var Vendor2 Vendor
 
-func setup() {
-	database.ConnectDatabase("TEST_DB_NAME")
-}
-
-func teardown() {
+func teardownVendors() {
 	database.Db.Exec(`DELETE FROM vendors`)
 }
 
@@ -38,13 +33,7 @@ func addVendorsToDb() {
 	Vendor2 = vendor2
 }
 
-func TestMain(m *testing.M) {
-	setup()
-	addVendorsToDb()
-	exitCode := m.Run()
-	teardown()
-	os.Exit(exitCode)
-}
+
 
 func TestGetVendorByID(t *testing.T) {
 	vendor, _ := GetVendorById(Vendor1.Id)
