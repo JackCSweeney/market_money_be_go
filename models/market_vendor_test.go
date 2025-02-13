@@ -52,11 +52,12 @@ func TestDeleteMarketVendor(t *testing.T) {
 	assert.Equal(t, 2, len(vendors))
 	assert.Equal(t, Vendor1.Id, vendors[0].Id)
 
-	DeleteMarketVendor(Market1.Id, Vendor1.Id)
+	status, _ := DeleteMarketVendor(Market1.Id, Vendor1.Id)
+	updatedVendors, _ := GetVendorsForMarket(Market1.Id)
 
-	vendors, _ = GetVendorsForMarket(Market1.Id)
-	assert.Equal(t, 1, len(vendors))
-	assert.Equal(t, Vendor2.Id, vendors[0].Id)
-	assert.NotEqual(t, Vendor1.Id, vendors[0].Id)
+	assert.Equal(t, "Successfully removed vendor from market", status)
+	assert.Equal(t, 1, len(updatedVendors))
+	assert.Equal(t, Vendor2.Id, updatedVendors[0].Id)
+	assert.NotEqual(t, Vendor1.Id, updatedVendors[0].Id)
 }
 

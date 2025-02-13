@@ -36,3 +36,26 @@ func GetVendorsForMarket(id int) ([]Vendor, error) {
 	}
 	return vendors, nil
 }
+
+func CreateMarketVendor(marketId int, vendorId int) (MarketVendor, error) {
+	sqlStatement := `INSERT INTO market_vendors (market_id, vendor_id) VALUES ($1, $2) RETURNING *`
+	var marketVendor MarketVendor
+
+	err := database.Db.QueryRow(sqlStatement, marketId, vendorId).Scan(&marketVendor.Id, &marketVendor.MarketId, &marketVendor.VendorId)
+	if err != nil {
+		fmt.Printf("Error: %s", err)
+		return marketVendor, err
+	}
+	return marketVendor, nil
+}
+
+func DeleteMarketVendor(marketId int, vendorId int) (string, error) {
+	sqlStatement := `DELETE FROM market_vendors WHERE market_id=$1 AND vendor_id=$2`
+	_, err := database.Db.Exec(sqlStatement, marketId, vendorId)
+	if err != nil {
+		fmt.Printf("Error: Could not remove vendor from market. %s", err)
+		return "Error: Could not remove vendor from market.", err
+	}
+	return "Successfully removed vendor from market", nil
+}
+
