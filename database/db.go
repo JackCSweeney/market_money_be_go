@@ -9,18 +9,18 @@ import(
 	"strconv"
 )
 
-var Db *sql.DB // created outside func so it's a global variable
+var Db *sql.DB
 
-func ConnectDatabase() {
-	err := godotenv.Load()
+func ConnectDatabase(nameKey string) {
+	err := godotenv.Load("../.env")
 	if err != nil {
-		fmt.Println("Error has occured with loading .env file")
+		fmt.Println("Error has occurred with loading .env file")
 	}
 
 	host := os.Getenv("HOST")
 	port, _ := strconv.Atoi(os.Getenv("PORT"))
 	user := os.Getenv("USER")
-	dbname := os.Getenv("DB_NAME")
+	dbname := os.Getenv(nameKey)
 
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+"dbname=%s sslmode=disable", host, port, user, dbname)
 
