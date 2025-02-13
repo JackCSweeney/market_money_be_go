@@ -11,7 +11,7 @@ var Market1 Market
 var Market2 Market
 
 func teardownMarkets() {
-	database.Db.Exec(`DELETE FROM vendors`)
+	database.Db.Exec(`DELETE FROM markets`)
 }
 
 func addMarketsToDb() {
