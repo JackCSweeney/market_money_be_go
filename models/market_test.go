@@ -44,14 +44,10 @@ func TestGetMarketByID(t *testing.T) {
 	assert.Equal(t, Market1.Lon, market.Lon)
 }
 
-// func TestGetAllMarkets(t *testing.T) {
-// 	markets, _ := GetAllMarkets()
+func TestGetAllMarkets(t *testing.T) {
+	markets, _ := GetAllMarkets()
 
-// 	assert.Equal(t, 2, len(markets))
-// 	assert.Equal(t, Market1.Id, markets[0].Id)
-// 	assert.Equal(t, Market2.Id, markets[1].Id)
-// }
-
-// func TestGetAllVendorsForOneMarket(t *testing.T) {
-
-// }
+	assert.Equal(t, 2, len(markets))
+	assert.Equal(t, Market1.Id, markets[0].Id)
+	assert.Equal(t, Market2.Id, markets[1].Id)
+}
