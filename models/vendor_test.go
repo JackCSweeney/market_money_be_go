@@ -18,15 +18,14 @@ func addVendorsToDb() {
 	vendor1 := Vendor{Name: "Vendor 1", Description: "First Vendor", ContactName: "Vendor Name 1", ContactPhone: "18002329393", CreditAccepted: false}
 	vendor2 := Vendor{Name: "Vendor 2", Description: "Second Vendor", ContactName: "Vendor Name 2", ContactPhone: "18002329393", CreditAccepted: true}
 
-	insert1 := `INSERT INTO vendors (name, description, contact_name, contact_phone, credit_accepted) VALUES ($1, $2, $3, $4, $5) RETURNING id;`
-	insert2 := `INSERT INTO vendors (name, description, contact_name, contact_phone, credit_accepted) VALUES ($1, $2, $3, $4, $5) RETURNING id;`
+	insert := `INSERT INTO vendors (name, description, contact_name, contact_phone, credit_accepted) VALUES ($1, $2, $3, $4, $5) RETURNING id;`
 	
 	id1 := 0
-	database.Db.QueryRow(insert1, vendor1.Name, vendor1.Description, vendor1.ContactName, vendor1.ContactPhone, vendor1.CreditAccepted).Scan(&id1)
+	database.Db.QueryRow(insert, vendor1.Name, vendor1.Description, vendor1.ContactName, vendor1.ContactPhone, vendor1.CreditAccepted).Scan(&id1)
 	vendor1.Id = id1
 
 	id2 := 0
-	database.Db.QueryRow(insert2, vendor2.Name, vendor2.Description, vendor2.ContactName, vendor2.ContactPhone, vendor2.CreditAccepted).Scan(&id2)
+	database.Db.QueryRow(insert, vendor2.Name, vendor2.Description, vendor2.ContactName, vendor2.ContactPhone, vendor2.CreditAccepted).Scan(&id2)
 	vendor2.Id = id2
 
 	Vendor1 = vendor1

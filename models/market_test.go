@@ -17,12 +17,12 @@ func teardownMarkets() {
 func addMarketsToDb() {
 	market1 :=  Market{Name: "Market 1", Street: "123 4th St.", City: "Los Angeles", County: "Los Angeles", State: "CA", Zip: "90034", Lat: "123.456", Lon: "78.901"}
 	market2 :=  Market{Name: "Market 2", Street: "234 5th St.", City: "Los Angeles", County: "Los Angeles", State: "CA", Zip: "90034", Lat: "123.456", Lon: "78.901"}
-	insert1 := `INSERT INTO markets (name, street, city, county, state, zip, lat, lon) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`
+	insert := `INSERT INTO markets (name, street, city, county, state, zip, lat, lon) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`
 	
 	id1 := 0
 	id2 := 0
-	database.Db.QueryRow(insert1, market1.Name, market1.Street, market1.City, market1.County, market1.State, market1.Zip, market1.Lat, market1.Lon).Scan(&id1)
-	database.Db.QueryRow(insert1, market2.Name, market2.Street, market2.City, market2.County, market2.State, market2.Zip, market2.Lat, market2.Lon).Scan(&id2)
+	database.Db.QueryRow(insert, market1.Name, market1.Street, market1.City, market1.County, market1.State, market1.Zip, market1.Lat, market1.Lon).Scan(&id1)
+	database.Db.QueryRow(insert, market2.Name, market2.Street, market2.City, market2.County, market2.State, market2.Zip, market2.Lat, market2.Lon).Scan(&id2)
 	market1.Id = id1
 	market2.Id = id2
 

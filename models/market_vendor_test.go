@@ -37,11 +37,26 @@ func TestGetVendorsForMarket(t *testing.T) {
 	assert.Equal(t, Vendor1.Id, vendors2[0].Id)
 }
 
-// func CreateMarketVendor(t *testing.T) {
+func TestCreateMarketVendor(t *testing.T) {
+	newMarketVendor, _ := CreateMarketVendor(Market2.Id, Vendor2.Id)
+	vendors, _ := GetVendorsForMarket(Market2.Id)
 
-// }
+	assert.Equal(t, Vendor2.Id, newMarketVendor.VendorId)
+	assert.Equal(t, Vendor2.Id, vendors[1].Id)
+	assert.Equal(t, 2, len(vendors))
+}
 
-// func DeleteMarketVendor(t *testing.T) {
-	
-// }
+func TestDeleteMarketVendor(t *testing.T) {
+	vendors, _ := GetVendorsForMarket(Market1.Id)
+
+	assert.Equal(t, 2, len(vendors))
+	assert.Equal(t, Vendor1.Id, vendors[0].Id)
+
+	DeleteMarketVendor(Market1.Id, Vendor1.Id)
+
+	vendors, _ = GetVendorsForMarket(Market1.Id)
+	assert.Equal(t, 1, len(vendors))
+	assert.Equal(t, Vendor2.Id, vendors[0].Id)
+	assert.NotEqual(t, Vendor1.Id, vendors[0].Id)
+}
 
