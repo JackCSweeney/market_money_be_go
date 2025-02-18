@@ -9,7 +9,7 @@ import (
 
 
 func setup() {
-	database.ConnectDatabase("TEST_DB_NAME")
+	database.ConnectDatabase("TEST_DB_NAME", "../.env")
 }
 
 func TestMain(m *testing.M) {
