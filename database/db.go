@@ -12,9 +12,10 @@ import(
 var Db *sql.DB
 
 func ConnectDatabase(nameKey string) {
-	err := godotenv.Load("../.env")
+	err := godotenv.Load(".env")
 	if err != nil {
-		fmt.Println("Error has occurred with loading .env file")
+		message := fmt.Sprintf("Error has occurred with loading .env file %s", err)
+		fmt.Println(message)
 	}
 
 	host := os.Getenv("HOST")
