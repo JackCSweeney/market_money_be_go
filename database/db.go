@@ -11,8 +11,8 @@ import(
 
 var Db *sql.DB
 
-func ConnectDatabase(nameKey string) {
-	err := godotenv.Load(".env")
+func ConnectDatabase(nameKey string, envPath string) {
+	err := godotenv.Load(envPath)
 	if err != nil {
 		message := fmt.Sprintf("Error has occurred with loading .env file %s", err)
 		fmt.Println(message)
