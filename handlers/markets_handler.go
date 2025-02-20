@@ -24,5 +24,5 @@ func HandleGetMarketById(context *gin.Context, id int) {
 		context.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 	}
 
-	context.JSON(http.StatusOK, market)
+	context.JSON(http.StatusOK, gin.H{"data": market})
 }
