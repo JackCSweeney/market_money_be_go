@@ -18,8 +18,8 @@ func TestMain(m *testing.M) {
 	gin.SetMode(gin.TestMode)
 	setup()
 	exitCode := m.Run()
-	os.Exit(exitCode)
 	teardown()
+	os.Exit(exitCode)
 }
 
 func router() *gin.Engine {
