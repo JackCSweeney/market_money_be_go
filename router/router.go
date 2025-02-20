@@ -24,12 +24,12 @@ func Router() {
 		id, _ := strconv.Atoi(c.Param("id"))
 		handlers.HandleGetMarketById(c, id)
 	})
-	// // Vendors
-	// publicRoutes.GET("/vendors", HandleGetAllVendors())
-	// publicRoutes.GET("/vendors/:id", func(c *gin.Context) {
-	// 	id, _ := strconv.Atoi(c.Param("id"))
-	// 	HandleGetVendorById()
-	// })
+	// Vendors
+	publicRoutes.GET("/vendors", handlers.HandleGetAllVendors)
+	publicRoutes.GET("/vendors/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		handlers.HandleGetVendorById(c, id)
+	})
 	// publicRoutes.POST("/vendors", HandleCreateVendor())
 	// publicRoutes.PATCH("/vendors/:id", func(c *gin.Context) {
 	// 	id, _ := strconv.Atoi(c.Param("id"))
