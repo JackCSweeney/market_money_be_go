@@ -6,6 +6,7 @@ import (
 	"testing"
 	"github.com/stretchr/testify/assert"
 	"fmt"
+	"example.com/mod/models"
 )
 
 func TestGetVendors(t *testing.T) {
@@ -54,5 +55,24 @@ func TestGetVendorById(t *testing.T) {
 	assert.Equal(t, Vendor1.Name, vendor1["name"])
 	assert.Equal(t, Vendor1.Description, vendor1["description"])
 	assert.Equal(t, Vendor1.CreditAccepted, vendor1["credit_accepted"])
+}
+
+func TestUpdateVendor(t *testing.T) {
+	url := fmt.Sprintf("/api/vendors/%d", Vendor1.Id)
+	vendorUpdates := models.Vendor{ContactName: "Updated Name", ContactPhone: "Updated Phone"}
+	writer := makeRequest("PATCH", url, vendorUpdates)
+
+	var response map[string]map[string]any
+	json.Unmarshal(writer.Body.Bytes(), &response)
+	_, exists := response["data"]
+	assert.Equal(t, true, exists)
+
+	updatedVendor := response["data"]
+	Vendor1, _ = models.GetVendorById(Vendor1.Id)
 	
+	assert.Equal(t, float64(Vendor1.Id), updatedVendor["id"])
+	assert.Equal(t, Vendor1.ContactName, updatedVendor["contact_name"])
+	assert.Equal(t, Vendor1.ContactPhone, updatedVendor["contact_phone"])
+	assert.Equal(t, Vendor1.ContactName, "Updated Name")
+	assert.Equal(t, Vendor1.ContactPhone, "Updated Phone")
 }

@@ -40,10 +40,10 @@ func router() *gin.Engine {
 		HandleGetVendorById(c, id)
 	})
 	// publicRoutes.POST("/vendors", HandleCreateVendor)
-	// publicRoutes.PATCH("/vendors/:id", func(c *gin.Context) {
-	// 	id, _ := strconv.Atoi(c.Param("id"))
-	// 	HandleUpdateVendor(c, id)
-	// })
+	publicRoutes.PATCH("/vendors/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		HandleUpdateVendor(c, id)
+	})
 	// // Market Vendors
 	// publicRoutes.GET("/markets/:id/vendors", func(c *gin.Context) {
 	// 	id, _ := strconv.Atoi(c.Param("id"))
