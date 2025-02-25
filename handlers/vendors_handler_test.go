@@ -68,6 +68,8 @@ func TestUpdateVendor(t *testing.T) {
 	assert.Equal(t, true, exists)
 
 	updatedVendor := response["data"]
+	Vendor1, _ = models.GetVendorById(Vendor1.Id)
+	
 	assert.Equal(t, float64(Vendor1.Id), updatedVendor["id"])
 	assert.Equal(t, Vendor1.ContactName, updatedVendor["contact_name"])
 	assert.Equal(t, Vendor1.ContactPhone, updatedVendor["contact_phone"])
