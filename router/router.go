@@ -31,10 +31,10 @@ func Router() {
 		handlers.HandleGetVendorById(c, id)
 	})
 	// publicRoutes.POST("/vendors", HandleCreateVendor())
-	// publicRoutes.PATCH("/vendors/:id", func(c *gin.Context) {
-	// 	id, _ := strconv.Atoi(c.Param("id"))
-	// 	HandleUpdateVendor()
-	// })
+	publicRoutes.PATCH("/vendors/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		handlers.HandleUpdateVendor(c, id)
+	})
 	// // Market Vendors
 	// publicRoutes.GET("/markets/:id/vendors", func(c *gin.Context) {
 	// 	id, _ := strconv.Atoi(c.Param("id"))
